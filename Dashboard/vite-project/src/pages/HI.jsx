@@ -43,10 +43,10 @@ const HI = ({ autofillData }) => {
       <Card className="max-w-2xl mx-auto shadow-lg">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
-            Professional Profile
+            Profile
           </CardTitle>
           <p className="text-center text-gray-500">
-            Enter your professional details below
+            Enter your details below
           </p>
         </CardHeader>
         <CardContent>
