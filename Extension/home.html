@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job applicatiob autofiller</title>
+  
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="main">
+    <div class="container">
+        <div class="ID">
+            <a href="http://localhost:5173/" target="_blank">USER1</a>
+        </div>
+        <button class="btn" onclick="autofillData()">Auto-fill</button>
+      </div>
+
+  </div>
+</div>
+<script>
+  // Simulate data to autofill from a user profile or an external source
+  const userData = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    phoneNumber: "+91 1234567890"
+  };
+
+  // Function to autofill the form fields
+  function autofillData() {
+    document.getElementById('name').value = userData.name;
+    document.getElementById('email').value = userData.email;
+    document.getElementById('phoneNumber').value = userData.phoneNumber;
+
+    console.log('Autofilled with data:', userData);
+  }
+</script>
+  </body>
+</html>
