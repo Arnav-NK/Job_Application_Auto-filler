@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import React, { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import React, { useState, useEffect } from "react";
 
 const HI = ({ autofillData }) => {
   const [person, setPerson] = useState({
@@ -12,55 +12,89 @@ const HI = ({ autofillData }) => {
     domain: "",
     skills: "",
     experience: "",
-  })
+  });
 
   useEffect(() => {
     if (autofillData && autofillData.contactInfo) {
-      console.log("Autofill Data Received:", autofillData)
-      const { contactInfo } = autofillData
+      console.log("Autofill Data Received:", autofillData);
+      const { contactInfo } = autofillData;
       setPerson((prevPerson) => ({
         ...prevPerson,
-        name: contactInfo.name !== "Name not found" ? contactInfo.name : prevPerson.name,
+        name:
+          contactInfo.name !== "Name not found"
+            ? contactInfo.name
+            : prevPerson.name,
         email: contactInfo.email || prevPerson.email,
         phone: contactInfo.phone || prevPerson.phone,
-        github: contactInfo.git !== "GitHub URL not found" ? contactInfo.git : prevPerson.github,
+        github:
+          contactInfo.git !== "GitHub URL not found"
+            ? contactInfo.git
+            : prevPerson.github,
         linkedin: contactInfo.Linkedin || prevPerson.linkedin,
-        domain: contactInfo.domain !== "Domain not found" ? contactInfo.domain : prevPerson.domain,
-        skills: contactInfo.skills !== "Skills not found" ? contactInfo.skills : prevPerson.skills,
-        // Note: 'experience' is not provided in the autofill data, so we keep the existing value
-      }))
+        domain:
+          contactInfo.domain !== "Domain not found"
+            ? contactInfo.domain
+            : prevPerson.domain,
+        skills:
+          contactInfo.skills !== "Skills not found"
+            ? contactInfo.skills
+            : prevPerson.skills,
+      }));
     }
-  }, [autofillData])
+  }, [autofillData]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setPerson((prevPerson) => ({
       ...prevPerson,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("Submitted Data:", person)
-    // Here you can add logic to send the data to your backend
-  }
+    e.preventDefault();
+    console.log("Submitted Data:", person);
+  };
+  const handleSubmitProfile = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3004/api/v1/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(person),
+      });
+
+      const data = await response.json();
+      console.log("Data saved in MongoDB:", data);
+    } catch (error) {
+      console.error("Error uploading data", error);
+    }
+  };
 
   return (
     <div className="min-h-screen py-8">
       <Card className="max-w-2xl mx-auto shadow-lg">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Profile</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">
+            Profile
+          </CardTitle>
           <p className="text-center text-gray-500">Enter your details below</p>
         </CardHeader>
         <CardContent>
           <form className="grid gap-6" onSubmit={handleSubmit}>
             {/* Basic Information Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700">Basic Information</h3>
+              <h3 className="text-lg font-semibold text-gray-700">
+                Basic Information
+              </h3>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="name"
+                    className="text-sm font-medium text-gray-700"
+                  >
                     Full Name
                   </label>
                   <input
@@ -74,7 +108,10 @@ const HI = ({ autofillData }) => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-gray-700"
+                  >
                     Email Address
                   </label>
                   <input
@@ -89,7 +126,10 @@ const HI = ({ autofillData }) => {
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="phone"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Phone Number
                 </label>
                 <input
@@ -106,10 +146,15 @@ const HI = ({ autofillData }) => {
 
             {/* Social Links Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700">Social Links</h3>
+              <h3 className="text-lg font-semibold text-gray-700">
+                Social Links
+              </h3>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="github" className="text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="github"
+                    className="text-sm font-medium text-gray-700"
+                  >
                     GitHub Profile
                   </label>
                   <input
@@ -123,7 +168,10 @@ const HI = ({ autofillData }) => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="linkedin" className="text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="linkedin"
+                    className="text-sm font-medium text-gray-700"
+                  >
                     LinkedIn Profile
                   </label>
                   <input
@@ -141,9 +189,14 @@ const HI = ({ autofillData }) => {
 
             {/* Professional Details Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700">Professional Details</h3>
+              <h3 className="text-lg font-semibold text-gray-700">
+                Professional Details
+              </h3>
               <div className="space-y-2">
-                <label htmlFor="domain" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="domain"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Domain/Specialization
                 </label>
                 <input
@@ -157,7 +210,10 @@ const HI = ({ autofillData }) => {
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="skills" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="skills"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Skills
                 </label>
                 <textarea
@@ -171,7 +227,10 @@ const HI = ({ autofillData }) => {
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="experience" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="experience"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Experience
                 </label>
                 <textarea
@@ -190,6 +249,7 @@ const HI = ({ autofillData }) => {
               <Button
                 type="submit"
                 className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                onClick={handleSubmitProfile}
               >
                 Save Profile
               </Button>
@@ -198,8 +258,9 @@ const HI = ({ autofillData }) => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default HI
+export default HI;
+
 
