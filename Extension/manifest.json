@@ -1,0 +1,28 @@
+{
+  "name":"Job application autofiller",
+  "version":"0.0.1",
+  "manifest_version":3,
+  "action":{
+      "default_popup":"home.html",
+      "default_icon":"pen.png"
+  },
+  "icons":{
+      "128":"pen.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; connect-src 'self' https://*;"
+  },
+"web_accessible_resources": [
+{
+  "resources": ["*.html", "*.js", "*.css"],
+  "matches": ["*://*/*"],
+  "js":["content.js"]
+}
+],
+  "permissions":[
+      "scripting", "activeTab","storage","tabs"
+  ],
+  "host_permissions":[
+      "<all_urls>"
+  ]
+}
