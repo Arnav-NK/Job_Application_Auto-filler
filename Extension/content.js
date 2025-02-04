@@ -25,17 +25,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           if (document.getElementById("phoneNumber")) {
             document.getElementById("phoneNumber").value = userData.phone || "";
           }
-          if (document.getElementById("address")) {
-            document.getElementById("address").value = userData.address || "";
-          }
 
           console.log("Autofilled the form successfully!");
+          sendResponse({ success: true });
         } else {
           console.error("No valid user data found");
+          sendResponse({ success: false, error: "No valid user data found" });
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        sendResponse({ success: false, error: error.message });
       });
+
+    return true; // Keeps the message port open
   }
 });
+
