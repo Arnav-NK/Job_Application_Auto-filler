@@ -1,7 +1,6 @@
 import Register from "../model/RegisterModel.js";
 import { catchAsyncErr } from "../middleware/catchasyncErr.js";
 import { ErrorHandler } from "../middleware/err.js";
-import { create } from "domain";
 
 export const register = catchAsyncErr(async (req, res, next) => {
   const {
@@ -33,16 +32,21 @@ export const register = catchAsyncErr(async (req, res, next) => {
       newUser,
     });
   } catch (error) {
+    console.error("Error while saving user profile:", error);
     return next(new ErrorHandler("Error saving user profile", 500));
   }
 });
+
 export const getRegister = catchAsyncErr(async (req, res, next) => {
-  const register = await Register.findOne().sort({ createdAt: -1 });
+  const register = await Register.findOne().sort({ createdAt: -1 }).limit(1); // Fetch the latest document
+
   if (!register) {
-    return new ErrorHandler("No user found", 404);
+    return next(new ErrorHandler("No user found", 404));
   }
+
   res.status(200).json({
     success: true,
     register,
   });
 });
+
