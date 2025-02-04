@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import React, { useState, useEffect } from "react";
 
 const HI = ({ autofillData }) => {
+  // State to manage form data
   const [person, setPerson] = useState({
     name: "",
     email: "",
@@ -14,6 +15,7 @@ const HI = ({ autofillData }) => {
     experience: "",
   });
 
+  // Autofill form data when `autofillData` changes
   useEffect(() => {
     if (autofillData && autofillData.contactInfo) {
       console.log("Autofill Data Received:", autofillData);
@@ -43,6 +45,7 @@ const HI = ({ autofillData }) => {
     }
   }, [autofillData]);
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPerson((prevPerson) => ({
@@ -51,25 +54,40 @@ const HI = ({ autofillData }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted Data:", person);
-  };
-  const handleSubmitProfile = async (e) => {
-    e.preventDefault();
+    console.log("Submitting Data:", person); // Log the data being sent
+
     try {
       const response = await fetch("http://localhost:3004/api/v1/register", {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(person),
+        body: JSON.stringify({
+          FullName: person.name,
+          email: person.email,
+          phone: person.phone,
+          github: person.github,
+          linkedin: person.linkedin,
+          domainSpecialization: person.domain,
+          skills: person.skills,
+          experience: person.experience,
+        }),
       });
 
       const data = await response.json();
       console.log("Data saved in MongoDB:", data);
+
+      if (response.ok) {
+        alert("Profile saved successfully!");
+      } else {
+        alert("Failed to save profile. Please try again.");
+      }
     } catch (error) {
       console.error("Error uploading data", error);
+      alert("An error occurred while saving the profile.");
     }
   };
 
@@ -245,11 +263,11 @@ const HI = ({ autofillData }) => {
               </div>
             </div>
 
+            {/* Submit Button */}
             <div className="flex justify-end pt-4">
               <Button
                 type="submit"
                 className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                onClick={handleSubmitProfile}
               >
                 Save Profile
               </Button>
