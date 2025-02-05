@@ -1,6 +1,5 @@
 /* styles.css */
 
-/* General styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -8,7 +7,6 @@ body {
   background-color: #f5f5f5;
 }
 
-/* Centering the main container */
 .main {
   display: flex;
   justify-content: center;
@@ -16,7 +14,7 @@ body {
   height: 100vh;
 }
 
-/* Styling the container */
+
 .container {
   text-align: center;
   background-color: #ffffff;
@@ -26,7 +24,7 @@ body {
   width: 300px;
 }
 
-/* Styling the user ID link */
+
 .ID a {
   text-decoration: none;
   font-size: 20px;
@@ -36,7 +34,7 @@ body {
   display: block;
 }
 
-/* Styling the button */
+
 .btn {
   margin-top: 20px;
   padding: 10px 20px;
@@ -49,7 +47,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-/* Button hover effect */
+
 .btn:hover {
   background-color: #0056b3;
 }
