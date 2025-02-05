@@ -6,7 +6,6 @@ import path from "path";
 
 const router = express.Router();
 
-// More robust file upload configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadDir = path.resolve(process.cwd(), "uploads");
@@ -54,8 +53,6 @@ router.post("/parse-resume", upload.single("resume"), async (req, res) => {
         path: absoluteFilePath,
       });
     }
-
-    // Read file with absolute path
     const fileBuffer = fs.readFileSync(absoluteFilePath);
 
     // Parse PDF
