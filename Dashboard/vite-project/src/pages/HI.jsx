@@ -3,7 +3,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import React, { useState, useEffect } from "react";
 
 const HI = ({ autofillData }) => {
-  // State to manage form data
   const [person, setPerson] = useState({
     name: "",
     email: "",
@@ -102,7 +101,6 @@ const HI = ({ autofillData }) => {
         </CardHeader>
         <CardContent>
           <form className="grid gap-6" onSubmit={handleSubmit}>
-            {/* Basic Information Section */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-700">
                 Basic Information
@@ -161,8 +159,6 @@ const HI = ({ autofillData }) => {
                 />
               </div>
             </div>
-
-            {/* Social Links Section */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-700">
                 Social Links
@@ -204,8 +200,6 @@ const HI = ({ autofillData }) => {
                 </div>
               </div>
             </div>
-
-            {/* Professional Details Section */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-700">
                 Professional Details
@@ -262,8 +256,6 @@ const HI = ({ autofillData }) => {
                 />
               </div>
             </div>
-
-            {/* Submit Button */}
             <div className="flex justify-end pt-4">
               <Button
                 type="submit"
