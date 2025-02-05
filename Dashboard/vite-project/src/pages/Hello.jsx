@@ -4,22 +4,17 @@ import * as pdfjsLib from "pdfjs-dist";
 const PDFUploader = () => {
   const [pdfText, setPdfText] = useState(""); // Store extracted text
   const [fileName, setFileName] = useState(""); // Store file name
-
-  // Function to parse the uploaded PDF
   const parsePDF = async (file) => {
     const reader = new FileReader();
 
     reader.onload = async function () {
       try {
-        // Get the PDF data as Uint8Array from FileReader
         const pdfData = new Uint8Array(reader.result);
 
-        // Get PDF document
         const pdfDocument = await pdfjsLib.getDocument(pdfData).promise;
 
         let textContent = "";
 
-        // Loop through each page in the PDF and extract text
         for (let pageNum = 1; pageNum <= pdfDocument.numPages; pageNum++) {
           const page = await pdfDocument.getPage(pageNum);
           const pageText = await page.getTextContent();
@@ -28,7 +23,6 @@ const PDFUploader = () => {
           });
         }
 
-        // Store the extracted text
         setPdfText(textContent);
       } catch (error) {
         console.error("Error parsing PDF:", error);
@@ -36,10 +30,8 @@ const PDFUploader = () => {
       }
     };
 
-    reader.readAsArrayBuffer(file); // Read the PDF file
+    reader.readAsArrayBuffer(file); 
   };
-
-  // Handle file input change
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type === "application/pdf") {
@@ -57,7 +49,6 @@ const PDFUploader = () => {
           Upload and Parse PDF
         </h2>
 
-        {/* File input */}
         <input
           type="file"
           accept="application/pdf"
@@ -65,14 +56,12 @@ const PDFUploader = () => {
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 mb-4"
         />
 
-        {/* Display uploaded PDF name */}
         {fileName && (
           <div className="mb-4">
             <strong>Uploaded PDF:</strong> {fileName}
           </div>
         )}
 
-        {/* Display parsed text */}
         <div className="text-gray-700">
           <strong>Extracted Text:</strong>
           <p>{pdfText || "No PDF uploaded or parsed yet."}</p>
