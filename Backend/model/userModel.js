@@ -65,7 +65,7 @@ userSchema.methods.getResetPasswordToken = function () {
 
   // Hash the token and set it to resetPasswordToken field
   this.resetPasswordToken = crypto
-    .createHash("sha256") // Fix the typo: 'shad256' → 'sha256'
+    .createHash("sha256")
     .update(resetToken)
     .digest("hex");
 
