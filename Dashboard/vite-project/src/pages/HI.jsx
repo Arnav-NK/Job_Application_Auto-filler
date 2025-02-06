@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import React, { useState, useEffect } from "react";
 
 const HI = ({ autofillData }) => {
+  // State to manage form data
   const [person, setPerson] = useState({
     name: "",
     email: "",
@@ -91,25 +92,26 @@ const HI = ({ autofillData }) => {
   };
 
   return (
-    <div className="min-h-screen py-8">
-      <Card className="max-w-2xl mx-auto shadow-lg">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">
+    <div className="min-h-screen py-8 bg-gradient-to-br from-gray-900 via-gray-800">
+      <Card className="max-w-4xl mx-auto shadow-xl rounded-2xl bg-white">
+        <CardHeader className="space-y-1 text-center py-6">
+          <CardTitle className="text-3xl font-bold text-indigo-700">
             Profile
           </CardTitle>
-          <p className="text-center text-gray-500">Enter your details below</p>
+          <p className="text-gray-500">Enter your details below</p>
         </CardHeader>
         <CardContent>
-          <form className="grid gap-6" onSubmit={handleSubmit}>
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700">
+          <form className="grid gap-8" onSubmit={handleSubmit}>
+            {/* Basic Information Section */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-indigo-700">
                 Basic Information
               </h3>
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
+                <div>
                   <label
                     htmlFor="name"
-                    className="text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     Full Name
                   </label>
@@ -119,14 +121,14 @@ const HI = ({ autofillData }) => {
                     name="name"
                     value={person.name}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="John Doe"
                   />
                 </div>
-                <div className="space-y-2">
+                <div>
                   <label
                     htmlFor="email"
-                    className="text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     Email Address
                   </label>
@@ -136,15 +138,15 @@ const HI = ({ autofillData }) => {
                     name="email"
                     value={person.email}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="john@example.com"
                   />
                 </div>
               </div>
-              <div className="space-y-2">
+              <div>
                 <label
                   htmlFor="phone"
-                  className="text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Phone Number
                 </label>
@@ -154,20 +156,22 @@ const HI = ({ autofillData }) => {
                   name="phone"
                   value={person.phone}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="+1 (91) 000-0000"
                 />
               </div>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700">
+
+            {/* Social Links Section */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-indigo-700">
                 Social Links
               </h3>
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="space-y-2">
+                <div>
                   <label
                     htmlFor="github"
-                    className="text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     GitHub Profile
                   </label>
@@ -177,14 +181,14 @@ const HI = ({ autofillData }) => {
                     name="github"
                     value={person.github}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="https://github.com/username"
                   />
                 </div>
-                <div className="space-y-2">
+                <div>
                   <label
                     htmlFor="linkedin"
-                    className="text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     LinkedIn Profile
                   </label>
@@ -194,20 +198,22 @@ const HI = ({ autofillData }) => {
                     name="linkedin"
                     value={person.linkedin}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder="https://linkedin.com/in/username"
                   />
                 </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-700">
+
+            {/* Professional Details Section */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-indigo-700">
                 Professional Details
               </h3>
-              <div className="space-y-2">
+              <div>
                 <label
                   htmlFor="domain"
-                  className="text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Domain/Specialization
                 </label>
@@ -217,14 +223,14 @@ const HI = ({ autofillData }) => {
                   name="domain"
                   value={person.domain}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="e.g., Full Stack Development, Data Science"
                 />
               </div>
-              <div className="space-y-2">
+              <div>
                 <label
                   htmlFor="skills"
-                  className="text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Skills
                 </label>
@@ -234,14 +240,14 @@ const HI = ({ autofillData }) => {
                   value={person.skills}
                   onChange={handleChange}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="List your key technical and soft skills"
                 />
               </div>
-              <div className="space-y-2">
+              <div>
                 <label
                   htmlFor="experience"
-                  className="text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Experience
                 </label>
@@ -251,15 +257,17 @@ const HI = ({ autofillData }) => {
                   value={person.experience}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="Describe your relevant work experience"
                 />
               </div>
             </div>
-            <div className="flex justify-end pt-4">
+
+            {/* Submit Button */}
+            <div className="flex justify-end">
               <Button
                 type="submit"
-                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Save Profile
               </Button>
