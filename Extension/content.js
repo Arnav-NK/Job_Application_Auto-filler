@@ -4,11 +4,11 @@ const fieldMappings = {
   github: ["github", "git", "github_url"],
   linkedin: ["linkedin", "linkedin_url"],
   FullName: ["FullName", "fname", "firstName", "name"],
+  skills: ["skills", "expertise", "abilities", "tech_skills"]
 };
 
-// ✅ Define `findField` function
 function findField(possibleNames, type) {
-  let inputs = document.querySelectorAll(`input[type='${type}'], input`);
+  let inputs = document.querySelectorAll(`input[type='${type}'], input, textarea`);
   for (let name of possibleNames) {
     let field = [...inputs].find(
       (input) =>
@@ -23,7 +23,7 @@ function findField(possibleNames, type) {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "autofill" && request.userData) {
-    let { email, phone, github, linkedin, FullName } = request.userData.register || {};
+    let { email, phone, github, linkedin, FullName, skills } = request.userData.register || {};
 
     // ✅ Autofill Email
     let emailField = findField(fieldMappings.email, "email");
@@ -61,6 +61,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (firstNameField) {
       firstNameField.value = FullName;
       firstNameField.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    // ✅ Autofill Skills
+    let skillsField = findField(fieldMappings.skills, "text");
+    if (!skillsField) skillsField = findField(fieldMappings.skills, "textarea");
+    if (skillsField) {
+      skillsField.value = skills;
+      skillsField.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
     sendResponse({ status: "success" });
