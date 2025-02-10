@@ -15,25 +15,46 @@ export const register = catchAsyncErr(async (req, res, next) => {
   } = req.body;
 
   try {
-    const newUser = await Register.create({
-      FullName,
-      email,
-      phone,
-      github,
-      linkedin,
-      domainSpecialization,
-      skills,
-      experience,
-    });
+    let user = await Register.findOne({ email });
 
-    res.status(200).json({
-      success: true,
-      message: "User successfully registered",
-      newUser,
-    });
+    if (user) {
+      // If user exists, update the data
+      user.FullName = FullName;
+      user.phone = phone;
+      user.github = github;
+      user.linkedin = linkedin;
+      user.domainSpecialization = domainSpecialization;
+      user.skills = skills;
+      user.experience = experience;
+      await user.save();
+      
+      res.status(200).json({
+        success: true,
+        message: "User data updated successfully",
+        user,
+      });
+    } else {
+      // If user does not exist, create a new one
+      user = await Register.create({
+        FullName,
+        email,
+        phone,
+        github,
+        linkedin,
+        domainSpecialization,
+        skills,
+        experience,
+      });
+
+      res.status(201).json({
+        success: true,
+        message: "User successfully registered",
+        user,
+      });
+    }
   } catch (error) {
-    console.error("Error while saving user profile:", error);
-    return next(new ErrorHandler("Error saving user profile", 500));
+    console.error("Error while saving/updating user profile:", error);
+    return next(new ErrorHandler("Error saving/updating user profile", 500));
   }
 });
 
