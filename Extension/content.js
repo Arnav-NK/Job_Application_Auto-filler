@@ -1,44 +1,42 @@
+const fieldMappings = {
+  email: ["email", "email1", "user_email", "login_email"],
+  password: ["password", "pass", "user_pass"],
+  first_name: ["first_name", "fname", "firstName", "given_name"],
+  last_name: ["last_name", "lname", "lastName", "surname", "family_name"],
+};
+
+function findField(possibleNames, type) {
+  let inputs = document.querySelectorAll(`input[type='${type}'], input`);
+  for (let name of possibleNames) {
+    let field = [...inputs].find(
+      (input) =>
+        input.id.includes(name) ||
+        (input.name && input.name.includes(name)) ||
+        (input.placeholder &&
+          input.placeholder.toLowerCase().includes(name.replace("_", " ")))
+    );
+    if (field) return field;
+  }
+  return null;
+}
+
+// Listen for messages from popup.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === "autofill") {
-    console.log("Autofill request received. Fetching data from backend...");
+  if (request.message === "autofill" && request.userData) {
+    let { email, password, first_name, last_name } = request.userData;
 
-    fetch("http://localhost:3004/api/v1/getRegister")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Data fetched from backend:", data);
+    let emailField = findField(fieldMappings.email, "email");
+    if (emailField) emailField.value = email;
 
-        if (data.success && data.register) {
-          const userData = data.register;
+    let passwordField = findField(fieldMappings.password, "password");
+    if (passwordField) passwordField.value = password;
 
-          // Autofill form fields
-          if (document.getElementById("name")) {
-            document.getElementById("name").value = userData.FullName || "";
-          }
-          if (document.getElementById("email")) {
-            document.getElementById("email").value = userData.email || "";
-          }
-          if (document.getElementById("phoneNumber")) {
-            document.getElementById("phoneNumber").value = userData.phone || "";
-          }
+    let firstNameField = findField(fieldMappings.first_name, "text");
+    if (firstNameField) firstNameField.value = first_name;
 
-          console.log("Autofilled the form successfully!");
-          sendResponse({ success: true });
-        } else {
-          console.error("No valid user data found");
-          sendResponse({ success: false, error: "No valid user data found" });
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        sendResponse({ success: false, error: error.message });
-      });
+    let lastNameField = findField(fieldMappings.last_name, "text");
+    if (lastNameField) lastNameField.value = last_name;
 
-    return true; // Keeps the message port open
+    sendResponse({ status: "success" });
   }
 });
-
