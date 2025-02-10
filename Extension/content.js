@@ -3,7 +3,7 @@ const fieldMappings = {
   phone: ["phone", "mobile", "contact"],
   github: ["github", "git", "github_url"],
   linkedin: ["linkedin", "linkedin_url"],
- FullName: ["first_name", "fname", "firstName", "name"],
+  FullName: ["FullName", "fname", "firstName", "name"],
 };
 
 // ✅ Define `findField` function
@@ -24,10 +24,6 @@ function findField(possibleNames, type) {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "autofill" && request.userData) {
     let { email, phone, github, linkedin, FullName } = request.userData.register || {};
-    let first_name = FullName ? FullName.split(" ")[0] : "";
-    let last_name = FullName && FullName.split(" ").length > 1 
-                    ? FullName.split(" ").slice(1).join(" ") 
-                    : "";
 
     // ✅ Autofill Email
     let emailField = findField(fieldMappings.email, "email");
@@ -61,17 +57,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 
     // ✅ Autofill First Name
-    let firstNameField = findField(fieldMappings.first_name, "text");
+    let firstNameField = findField(fieldMappings.FullName, "text");
     if (firstNameField) {
-      firstNameField.value = first_name;
+      firstNameField.value = FullName;
       firstNameField.dispatchEvent(new Event("input", { bubbles: true }));
-    }
-
-    // ✅ Autofill Last Name
-    let lastNameField = findField(fieldMappings.last_name, "text");
-    if (lastNameField) {
-      lastNameField.value = last_name;
-      lastNameField.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
     sendResponse({ status: "success" });
