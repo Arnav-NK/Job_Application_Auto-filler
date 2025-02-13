@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import React, { useState, useEffect } from "react";
-
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 const HI = ({ autofillData }) => {
   // State to manage form data
   const [person, setPerson] = useState({
@@ -93,188 +93,190 @@ const HI = ({ autofillData }) => {
 
   return (
     <div className="min-h-screen py-8 ">
-      <Card className="max-w-4xl mx-auto shadow-xl rounded-2xl bg-white">
-        <CardHeader className="space-y-1 text-center py-6">
-          <CardTitle className="text-3xl font-bold text-indigo-700">
-            Profile
-          </CardTitle>
-          <p className="text-gray-500">Enter your details below</p>
-        </CardHeader>
-        <CardContent>
-          <form className="grid gap-8" onSubmit={handleSubmit}>
-            {/* Basic Information Section */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-indigo-700">
-                Basic Information
-              </h3>
-              <div className="grid gap-4 md:grid-cols-2">
+      <BackgroundGradient animate className="rounded-xl p-6">
+        <Card className="max-w-4xl mx-auto shadow-xl rounded-2xl bg-white">
+          <CardHeader className="space-y-1 text-center py-6">
+            <CardTitle className="text-3xl font-bold text-indigo-700">
+              Profile
+            </CardTitle>
+            <p className="text-gray-500">Enter your details below</p>
+          </CardHeader>
+          <CardContent>
+            <form className="grid gap-8" onSubmit={handleSubmit}>
+              {/* Basic Information Section */}
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-indigo-700">
+                  Basic Information
+                </h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={person.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={person.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
                 <div>
                   <label
-                    htmlFor="name"
+                    htmlFor="phone"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Full Name
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={person.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="+1 (91) 000-0000"
+                  />
+                </div>
+              </div>
+
+              {/* Social Links Section */}
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-indigo-700">
+                  Social Links
+                </h3>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="github"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      GitHub Profile
+                    </label>
+                    <input
+                      type="text"
+                      id="github"
+                      name="github"
+                      value={person.github}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="https://github.com/username"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="linkedin"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      LinkedIn Profile
+                    </label>
+                    <input
+                      type="text"
+                      id="linkedin"
+                      name="linkedin"
+                      value={person.linkedin}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="https://linkedin.com/in/username"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Professional Details Section */}
+              <div className="space-y-6">
+                <h3 className="text-xl font-semibold text-indigo-700">
+                  Professional Details
+                </h3>
+                <div>
+                  <label
+                    htmlFor="domain"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Domain/Specialization
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={person.name}
+                    id="domain"
+                    name="domain"
+                    value={person.domain}
                     onChange={handleChange}
                     className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="John Doe"
+                    placeholder="e.g., Full Stack Development, Data Science"
                   />
                 </div>
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="skills"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Email Address
+                    Skills
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={person.email}
+                  <textarea
+                    id="skills"
+                    name="skills"
+                    value={person.skills}
                     onChange={handleChange}
+                    rows={3}
                     className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="john@example.com"
-                  />
-                </div>
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={person.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="+1 (91) 000-0000"
-                />
-              </div>
-            </div>
-
-            {/* Social Links Section */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-indigo-700">
-                Social Links
-              </h3>
-              <div className="grid gap-4 md:grid-cols-2">
-                <div>
-                  <label
-                    htmlFor="github"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    GitHub Profile
-                  </label>
-                  <input
-                    type="text"
-                    id="github"
-                    name="github"
-                    value={person.github}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="https://github.com/username"
+                    placeholder="List your key technical and soft skills"
                   />
                 </div>
                 <div>
                   <label
-                    htmlFor="linkedin"
+                    htmlFor="experience"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    LinkedIn Profile
+                    Experience
                   </label>
-                  <input
-                    type="text"
-                    id="linkedin"
-                    name="linkedin"
-                    value={person.linkedin}
+                  <textarea
+                    id="experience"
+                    name="experience"
+                    value={person.experience}
                     onChange={handleChange}
+                    rows={4}
                     className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="https://linkedin.com/in/username"
+                    placeholder="Describe your relevant work experience"
                   />
                 </div>
               </div>
-            </div>
 
-            {/* Professional Details Section */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-indigo-700">
-                Professional Details
-              </h3>
-              <div>
-                <label
-                  htmlFor="domain"
-                  className="block text-sm font-medium text-gray-700"
+              {/* Submit Button */}
+              <div className="flex justify-end">
+                <Button
+                  type="submit"
+                  className="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  Domain/Specialization
-                </label>
-                <input
-                  type="text"
-                  id="domain"
-                  name="domain"
-                  value={person.domain}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="e.g., Full Stack Development, Data Science"
-                />
+                  Save Profile
+                </Button>
               </div>
-              <div>
-                <label
-                  htmlFor="skills"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Skills
-                </label>
-                <textarea
-                  id="skills"
-                  name="skills"
-                  value={person.skills}
-                  onChange={handleChange}
-                  rows={3}
-                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="List your key technical and soft skills"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="experience"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Experience
-                </label>
-                <textarea
-                  id="experience"
-                  name="experience"
-                  value={person.experience}
-                  onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Describe your relevant work experience"
-                />
-              </div>
-            </div>
-
-            {/* Submit Button */}
-            <div className="flex justify-end">
-              <Button
-                type="submit"
-                className="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Save Profile
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+            </form>
+          </CardContent>
+        </Card>
+      </BackgroundGradient>
     </div>
   );
 };
