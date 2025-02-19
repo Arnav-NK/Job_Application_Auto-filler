@@ -8,8 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Novatrix } from "uvcanvas";
 
-import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,7 +47,6 @@ const Login = ({ className, ...props }) => {
 
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
-      <AnimatedBackground />
       <div
         className={cn("flex flex-col gap-6 w-full max-w-sm mx-auto", className)}
         {...props}
@@ -57,7 +56,7 @@ const Login = ({ className, ...props }) => {
             <CardTitle className="text-3xl font-bold text-white text-center">
               Welcome Back
             </CardTitle>
-            <CardDescription className="text-center text-gray-900">
+            <CardDescription className="text-center text-gray-300">
               Login with your Apple or Google account
             </CardDescription>
           </CardHeader>
@@ -74,13 +73,13 @@ const Login = ({ className, ...props }) => {
                   variant="outline"
                   className="w-full flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white"
                 >
-                  🍏 Login with Apple
+                   Login with Apple
                 </Button>
                 <Button
                   variant="outline"
                   className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white"
                 >
-                  🔵 Login with Google
+                   Login with Google
                 </Button>
               </div>
 
@@ -119,7 +118,7 @@ const Login = ({ className, ...props }) => {
                   <Input
                     id="password"
                     type="password"
-                    placeholder="Your password"
+                    placeholder="********"
                     className="bg-gray-800 text-white placeholder-gray-400 border-gray-600"
                     value={user.password}
                     onChange={(e) =>
@@ -141,7 +140,7 @@ const Login = ({ className, ...props }) => {
               </div>
             </form>
 
-            <div className="mt-4 text-center text-sm text-gray-900">
+            <div className="mt-4 text-center text-sm text-gray-400">
               Don’t have an account?{" "}
               <a
                 href="/sign"
@@ -150,26 +149,19 @@ const Login = ({ className, ...props }) => {
                 Sign up
               </a>
             </div>
-            <br />
-            <p className="text-center text-sm text-gray-900">
-              By clicking continue, you agree to our{" "}
-              <a
-                href="#"
-                className="underline text-gray-900 hover:text-gray-400"
-              >
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a
-                href="#"
-                className="underline text-gray-900 hover:text-gray-400"
-              >
-                Privacy Policy
-              </a>
-            </p>
           </CardContent>
         </Card>
 
+        <p className="text-center text-sm text-gray-400">
+          By clicking continue, you agree to our{" "}
+          <a href="#" className="underline text-gray-300 hover:text-gray-400">
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="#" className="underline text-gray-300 hover:text-gray-400">
+            Privacy Policy
+          </a>
+        </p>
         {/* <Novatrix /> */}
       </div>
     </div>
