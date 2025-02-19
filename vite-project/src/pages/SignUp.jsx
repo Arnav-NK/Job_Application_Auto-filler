@@ -101,11 +101,11 @@ const SignUp = () => {
             </button>
           </div>
         </form>
-        <p className="text-center text-sm text-gray-300 mt-4">
+        <p className="text-center text-sm text-gray-900 mt-4">
           Already have an account?{" "}
           <a
-            href="/login"
-            className="underline text-blue-400 hover:text-blue-500 transition-all"
+            href="/"
+            className="underline text-blue-800 hover:text-blue-500 transition-all duration-300"
           >
             Login here
           </a>
