@@ -3,7 +3,7 @@ import * as THREE from "three";
 
 const AnimatedBackground = () => {
   const mountRef = useRef(null);
-  const [bgColor, setBgColor] = useState("#223f47"); // Default black
+  const [bgColor, setBgColor] = useState("#4defe9"); // Default black
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -36,7 +36,7 @@ const AnimatedBackground = () => {
 
     const particlesMaterial = new THREE.PointsMaterial({
       size: 0.05,
-      color: 0xffffff,
+      color: 0xf000000,
     });
 
     const particlesMesh = new THREE.Points(
@@ -48,8 +48,8 @@ const AnimatedBackground = () => {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      particlesMesh.rotation.x += 0.001;
-      particlesMesh.rotation.y += 0.001;
+      particlesMesh.rotation.x += 0.002;
+      particlesMesh.rotation.y += 0.008;
       renderer.render(scene, camera);
     };
 
