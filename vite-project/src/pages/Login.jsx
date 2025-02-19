@@ -8,8 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Novatrix } from "uvcanvas";
 
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,6 +47,7 @@ const Login = ({ className, ...props }) => {
 
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
+      <AnimatedBackground />
       <div
         className={cn("flex flex-col gap-6 w-full max-w-sm mx-auto", className)}
         {...props}
@@ -56,7 +57,7 @@ const Login = ({ className, ...props }) => {
             <CardTitle className="text-3xl font-bold text-white text-center">
               Welcome Back
             </CardTitle>
-            <CardDescription className="text-center text-gray-300">
+            <CardDescription className="text-center text-gray-900">
               Login with your Apple or Google account
             </CardDescription>
           </CardHeader>
@@ -140,7 +141,7 @@ const Login = ({ className, ...props }) => {
               </div>
             </form>
 
-            <div className="mt-4 text-center text-sm text-gray-400">
+            <div className="mt-4 text-center text-sm text-gray-900">
               Don’t have an account?{" "}
               <a
                 href="/sign"
@@ -149,19 +150,26 @@ const Login = ({ className, ...props }) => {
                 Sign up
               </a>
             </div>
+            <br />
+            <p className="text-center text-sm text-gray-900">
+              By clicking continue, you agree to our{" "}
+              <a
+                href="#"
+                className="underline text-gray-900 hover:text-gray-400"
+              >
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a
+                href="#"
+                className="underline text-gray-900 hover:text-gray-400"
+              >
+                Privacy Policy
+              </a>
+            </p>
           </CardContent>
         </Card>
 
-        <p className="text-center text-sm text-gray-400">
-          By clicking continue, you agree to our{" "}
-          <a href="#" className="underline text-gray-300 hover:text-gray-400">
-            Terms of Service
-          </a>{" "}
-          and{" "}
-          <a href="#" className="underline text-gray-300 hover:text-gray-400">
-            Privacy Policy
-          </a>
-        </p>
         {/* <Novatrix /> */}
       </div>
     </div>
