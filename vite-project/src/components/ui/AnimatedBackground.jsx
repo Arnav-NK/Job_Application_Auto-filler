@@ -1,42 +1,77 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const AnimatedBackground = () => {
   const mountRef = useRef(null);
-  const [bgColor, setBgColor] = useState("#4defe9"); // Default black
 
   useEffect(() => {
+   
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(bgColor); // Set initial background color
+
 
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      100
     );
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
 
-    // Ensure mountRef exists before appending
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(1);
+
     if (mountRef.current) {
       mountRef.current.appendChild(renderer.domElement);
     }
 
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 5000;
+
+    const aspect = window.innerWidth / window.innerHeight;
+    const bgGeometry = new THREE.PlaneGeometry(20 * aspect, 20);
+    const bgMaterial = new THREE.MeshBasicMaterial({
+      side: THREE.DoubleSide,
+      map: createGradientTexture(128), // Updated with random dark colors
+    });
+    const bgPlane = new THREE.Mesh(bgGeometry, bgMaterial);
+    bgPlane.position.z = -5;
+    scene.add(bgPlane);
+
+   
+    const particlesCount = 800; 
     const posArray = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 10;
+    const scaleArray = new Float32Array(particlesCount); 
+    for (let i = 0; i < particlesCount; i++) {
+      const i3 = i * 3;
+      const r = Math.random() * 8;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      posArray[i3] = r * Math.sin(phi) * Math.cos(theta);
+      posArray[i3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      posArray[i3 + 2] = r * Math.cos(phi);
+      scaleArray[i] = Math.random() * 0.1 + 0.05; 
     }
+
+    const particlesGeometry = new THREE.BufferGeometry();
     particlesGeometry.setAttribute(
       "position",
       new THREE.BufferAttribute(posArray, 3)
     );
+    particlesGeometry.setAttribute(
+      "scale",
+      new THREE.BufferAttribute(scaleArray, 1)
+    );
 
+   
+    const particleTexture = createCircleTexture(16);
     const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.05,
-      color: 0xf000000,
+      size: 0.1, // Base size, varied by scale attribute
+      map: particleTexture,
+      transparent: true,
+      blending: THREE.NormalBlending,
+      opacity: 0.7,
+      color: 0xffffff, // White particles
+      sizeAttenuation: true,
     });
 
     const particlesMesh = new THREE.Points(
@@ -44,51 +79,107 @@ const AnimatedBackground = () => {
       particlesMaterial
     );
     scene.add(particlesMesh);
-    camera.position.z = 5;
 
-    const animate = () => {
+    
+    let lastTime = 0;
+    const animate = (time) => {
       requestAnimationFrame(animate);
-      particlesMesh.rotation.x += 0.002;
-      particlesMesh.rotation.y += 0.008;
+
+      const delta = (time - lastTime) / 1000;
+      if (delta > 0.016) {
+        particlesMesh.rotation.y += 0.0002 * delta * 60; 
+        lastTime = time;
+      }
+
       renderer.render(scene, camera);
     };
+    requestAnimationFrame(animate);
 
-    animate();
 
     const handleResize = () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      bgPlane.scale.set(width / height, 1, 1);
     };
-
     window.addEventListener("resize", handleResize);
 
+    // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
-      // Ensure mountRef.current exists before removing the child
-      if (mountRef.current) {
+      if (mountRef.current && renderer.domElement) {
         mountRef.current.removeChild(renderer.domElement);
       }
-      renderer.dispose(); // Clean up renderer to prevent memory leaks
+      renderer.dispose();
+      particlesGeometry.dispose();
+      particlesMaterial.dispose();
+      bgGeometry.dispose();
+      bgMaterial.dispose();
     };
-  }, [bgColor]); // Reacts to color changes
+  }, []);
 
-  return (
-    <div ref={mountRef} className="absolute inset-0 z-0">
-      {/* <button
-        onClick={() => setBgColor("#ff0000")}
-        className="absolute top-4 left-4 p-2 bg-white"
-      >
-        Change Background to Red
-      </button> */}
-      {/* <button
-        onClick={() => setBgColor("#0000ff")}
-        className="absolute top-4 left-20 p-2 bg-white"
-      >
-        Change Background to Blue
-      </button> */}
-    </div>
-  );
+
+  function createCircleTexture(size = 16) {
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+
+    const gradient = context.createRadialGradient(
+      size / 2,
+      size / 2,
+      0,
+      size / 2,
+      size / 2,
+      size / 2
+    );
+    gradient.addColorStop(0, "rgba(255, 255, 255, 1)"); // White center
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)"); // Fade to transparent
+
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, size, size);
+
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }
+
+
+  function createGradientTexture(size = 128) {
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+
+    // Define dark colors
+    const darkColors = [
+      "rgba(0, 51, 102, 0.9)", // Dark blue
+      "rgba(0, 51, 25, 0.9)", // Dark green
+      "rgba(20, 20, 20, 0.9)", // Near-black
+    ];
+
+  
+    const randomIndex = Math.floor(Math.random() * darkColors.length);
+    const startColor = darkColors[randomIndex];
+
+  
+    const gradient = context.createLinearGradient(0, size, size, 0);
+    gradient.addColorStop(0, startColor); 
+    gradient.addColorStop(0.3, "rgba(0, 51, 102, 0.8)"); 
+    gradient.addColorStop(0.7, "rgba(51, 0, 51, 0.7)"); 
+    gradient.addColorStop(1, "rgba(20, 20, 20, 0)"); 
+
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, size, size);
+
+    const texture = new THREE.Texture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }
+
+  return <div ref={mountRef} className="absolute inset-0 z-0" />;
 };
 
 export default AnimatedBackground;
