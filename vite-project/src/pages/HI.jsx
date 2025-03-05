@@ -93,7 +93,7 @@ const HI = ({ autofillData }) => {
 
   return (
     <div className="min-h-screen py-8 ">
-      <BackgroundGradient animate className="rounded-xl p-6">
+      <BackgroundGradient animate className="rounded-xl p-2">
         <Card className="max-w-4xl mx-auto shadow-xl rounded-2xl bg-white">
           <CardHeader className="space-y-1 text-center py-6">
             <CardTitle className="text-3xl font-bold text-indigo-700">
