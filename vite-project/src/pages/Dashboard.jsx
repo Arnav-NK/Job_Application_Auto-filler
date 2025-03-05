@@ -39,9 +39,15 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-800 via-gray-950 py-12 px-4 sm:px-6 lg:px-8">
+    <div
+  className="min-h-screen py-12 px-4 sm:px-6 lg:px-8"
+  style={{
+   background: "radial-gradient(circle, rgba(0,0,0,1) 24%, rgba(0,0,0,1) 59%, rgb(0, 59, 108) 100%)",
+  }}>
+
+
       <div className="max-w-4xl mx-auto">
-        <BackgroundGradient animate className="rounded-xl p-6">
+        <BackgroundGradient animate className="rounded-xl p-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
           <Card className="bg-white/80 backdrop-blur-sm shadow-xl">
             <CardHeader className="text-center">
               {user.avatar && user.avatar.url ? (
