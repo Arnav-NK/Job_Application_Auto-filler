@@ -53,7 +53,7 @@ const PDFUploader = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
-        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
+        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6" >
           Upload and Parse PDF
         </h2>
 
