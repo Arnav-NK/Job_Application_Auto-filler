@@ -1,5 +1,6 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "fetchData") {
+    // get data of user from backend who latestly parsed the resume
     fetch("http://localhost:3004/api/v1/getRegister")
       .then((response) => {
         if (!response.ok) {
