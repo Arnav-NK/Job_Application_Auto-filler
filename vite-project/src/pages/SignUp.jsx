@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
 const SignUp = () => {
   const [user, setUser] = useState({
     email: "",
@@ -54,6 +54,7 @@ const SignUp = () => {
 
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
+      <AnimatedBackground />
       <div className="w-full max-w-md p-8 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg">
         <h2 className="text-3xl font-bold text-center text-white mb-6">
           Create an Account
