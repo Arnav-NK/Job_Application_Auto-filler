@@ -14,7 +14,7 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
+// ejs  file to upload  resume
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "indes.html"));
 });
