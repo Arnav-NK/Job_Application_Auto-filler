@@ -18,7 +18,7 @@ const Upload = () => {
   });
   const [file, setFile] = useState(null);
 
-  // Getting the user from Redux store
+
   const { user } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
@@ -39,12 +39,12 @@ const Upload = () => {
 
     const data = new FormData();
 
-    // Append formData
+ 
     for (const key in formData) {
       data.append(key, formData[key]);
     }
 
-    // Append file
+   
     if (file) {
       data.append("user_file", file);
     }
@@ -62,8 +62,9 @@ const Upload = () => {
   };
 
   return (
+    // it contain logo and upload resume section
     <div className="container mx-auto px-4 py-8">
-      {/* Display user avatar */}
+    
       {user.avatar && user.avatar.url ? (
         <img
           src={user.avatar.url}
@@ -74,15 +75,14 @@ const Upload = () => {
         <div className="h-14 w-14 rounded-full bg-gray-300 mx-auto mb-4" />
       )}
 
-      {/* Welcome message */}
       <h1 className="text-3xl font-bold text-center mb-6">
         Welcome back, <span className="text-blue-600">{user.fullName}</span>!
       </h1>
 
-      {/* Form Container */}
+     
       <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Resume Upload */}
+      
           <div className="flex flex-col items-center mb-6">
             <label
               htmlFor="resume"
@@ -99,9 +99,7 @@ const Upload = () => {
             </label>
           </div>
 
-          {/* Gender Input */}
-          {/* Similar for other fields */}
-          {/* Submit Button */}
+        
           <button
             type="submit"
             className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
