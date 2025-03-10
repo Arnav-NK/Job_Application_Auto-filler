@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import React, { useState, useEffect } from "react";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 const HI = ({ autofillData }) => {
-  // State to manage form data
+  // usestate of person parsed data from resume pdf
   const [person, setPerson] = useState({
     name: "",
     email: "",
@@ -15,7 +15,7 @@ const HI = ({ autofillData }) => {
     experience: "",
   });
 
-  // Autofill form data when `autofillData` changes
+  // useEffect to autofill the data from resume pdf
   useEffect(() => {
     if (autofillData && autofillData.contactInfo) {
       console.log("Autofill Data Received:", autofillData);
@@ -57,7 +57,7 @@ const HI = ({ autofillData }) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting Data:", person); // Log the data being sent
+    console.log("Submitting Data:", person); 
 
     try {
       const response = await fetch("http://localhost:3004/api/v1/register", {
@@ -103,7 +103,7 @@ const HI = ({ autofillData }) => {
           </CardHeader>
           <CardContent>
             <form className="grid gap-8" onSubmit={handleSubmit}>
-              {/* Basic Information Section */}
+           
               <div className="space-y-6">
                 <h3 className="text-xl font-semibold text-indigo-700">
                   Basic Information
@@ -163,7 +163,7 @@ const HI = ({ autofillData }) => {
                 </div>
               </div>
 
-              {/* Social Links Section */}
+            
               <div className="space-y-6">
                 <h3 className="text-xl font-semibold text-indigo-700">
                   Social Links
@@ -206,7 +206,7 @@ const HI = ({ autofillData }) => {
                 </div>
               </div>
 
-              {/* Professional Details Section */}
+    
               <div className="space-y-6">
                 <h3 className="text-xl font-semibold text-indigo-700">
                   Professional Details
@@ -264,7 +264,7 @@ const HI = ({ autofillData }) => {
                 </div>
               </div>
 
-              {/* Submit Button */}
+             
               <div className="flex justify-end">
                 <Button
                   type="submit"
