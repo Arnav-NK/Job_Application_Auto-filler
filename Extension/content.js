@@ -6,7 +6,7 @@ const fieldMappings = {
   FullName: ["FullName", "fname", "firstName", "name"],
 };
 
-// ✅ Define `findField` function
+// `findField` in input form by id,name  
 function findField(possibleNames, type) {
   let inputs = document.querySelectorAll(`input[type='${type}'], input`);
   for (let name of possibleNames) {
@@ -27,14 +27,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let { email, phone, github, linkedin, FullName } =
       request.userData.register || {};
 
-    // ✅ Autofill Email
+    // Autofill Email
     let emailField = findField(fieldMappings.email, "email");
     if (emailField) {
       emailField.value = email;
       emailField.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
-    // ✅ Autofill Phone
+    //  Autofill Phone
     let phoneField = findField(fieldMappings.phone, "tel");
     if (!phoneField) phoneField = findField(fieldMappings.phone, "text");
     if (phoneField) {
@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       phoneField.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
-    // ✅ Autofill GitHub
+    //  Autofill GitHub
     let githubField = findField(fieldMappings.github, "url");
     if (!githubField) githubField = findField(fieldMappings.github, "text");
     if (githubField) {
@@ -50,7 +50,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       githubField.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
-    // ✅ Autofill LinkedIn
+    //  Autofill LinkedIn
     let linkedinField = findField(fieldMappings.linkedin, "url");
     if (!linkedinField)
       linkedinField = findField(fieldMappings.linkedin, "text");
@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       linkedinField.dispatchEvent(new Event("input", { bubbles: true }));
     }
 
-    // ✅ Autofill First Name
+    // Autofill First Name
     let firstNameField = findField(fieldMappings.FullName, "text");
     if (firstNameField) {
       firstNameField.value = FullName;
