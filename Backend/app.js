@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
-
+// cors fuctionality to connect with frontend
 app.use(
   cors({
     origin: [
@@ -38,13 +38,14 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
+// for parsing the incoming request
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// user routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1", RegisterRoute);
-
+//  function to extract the info from resume pdf
 function extractContactInfo(text) {
   const namePattern = /^[A-Z ]{2,}(?=\s|$)/;
   const phonePattern =
