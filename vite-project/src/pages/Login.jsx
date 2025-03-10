@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Novatrix } from "uvcanvas";
-
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,6 +51,7 @@ const Login = ({ className, ...props }) => {
         className={cn("flex flex-col gap-6 w-full max-w-sm mx-auto", className)}
         {...props}
       >
+        <AnimatedBackground />
         <Card className="w-full p-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg">
           <CardHeader className="space-y-1">
             <CardTitle className="text-3xl font-bold text-white text-center">
@@ -73,13 +74,13 @@ const Login = ({ className, ...props }) => {
                   variant="outline"
                   className="w-full flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white"
                 >
-                   Login with Apple
+                  Login with Apple
                 </Button>
                 <Button
                   variant="outline"
                   className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white"
                 >
-                   Login with Google
+                  Login with Google
                 </Button>
               </div>
 
