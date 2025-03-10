@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import DashBoard from "./pages/Dashboard"; // Correctly import the component
+import DashBoard from "./pages/Dashboard"; 
 import FileUpload from "./pages/Hello";
 import SignUp from "./pages/SignUp";
 import PDFUploader from "./pages/Hello";
