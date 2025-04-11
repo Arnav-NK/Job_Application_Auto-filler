@@ -2,13 +2,9 @@
 
 **Job_Application_Auto-filler** is a Chrome extension designed to make job hunting easier. Simply upload your resume in PDF format, and this tool will automatically scan your data and autofill job applications on popular portals. You can also manually edit the fields before submitting.
 
-> 📽️ Demo Video:
-> <video width="100%" controls>
+ 📽️ Demo Video
 
-  <source src="https://github.com/Arnav-NK/Job_Application_Auto-filler/blob/main/vite-project/src/assets/screen-recording-2025-04-11-222009_N4tlRTYQ.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
----
+🎬 [Click to watch the demo](https://streamable.com/tom58r)
 
 ## 🛠 Features
 
