@@ -61,7 +61,7 @@ The extension will automatically detect and fill matching form fields using your
 ## 1️⃣ Clone the Repository
 
 ```bash
-git clone [<your-repository-url>](https://github.com/Arnav-NK/Job_Application_Auto-filler.git)
+git clone https://github.com/Arnav-NK/Job_Application_Auto-filler.git
 cd Job_Application_Auto-filler
 ```
 
