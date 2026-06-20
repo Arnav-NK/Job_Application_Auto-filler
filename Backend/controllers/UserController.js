@@ -85,13 +85,7 @@ export const signup = catchAsyncErr(async (req, res, next) => {
   });
 
   // Generate token for the user after successful registration
-  generateToken(newUser, "User Registered Successfully", 201, res);
-
-  res.status(201).json({
-    success: true,
-    message: "User successfully registered",
-    newUser,
-  });
+  generateToken(newUser, "User successfully registered", 201, res);
 });
 
 export const login = catchAsyncErr(async (req, res, next) => {

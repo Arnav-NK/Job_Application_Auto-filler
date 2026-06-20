@@ -17,11 +17,18 @@ const AnimatedBackground = () => {
     const gradientTexture = createGradientTexture(128);
 
     // Setup renderer with better performance settings
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: false,
-      powerPreference: "high-performance",
-    });
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: false,
+        powerPreference: "high-performance",
+      });
+    } catch (e) {
+      console.warn("WebGL not supported or context creation failed. Background animation disabled.", e);
+      return; // Fallback gracefully by not rendering the background
+    }
+    
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1); // Limit pixel ratio
 

@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dbConnect from "./database/dbConnect.js";
 import userRoutes from "./router/userrouter.js";
-import PDFParser from "pdf2json";
+import pdfParse from "pdf-parse/lib/pdf-parse.js";
 import upload from "./multer.js";
 import path from "path";
 import RegisterRoute from "./router/RegisterRouter.js";
@@ -95,30 +95,30 @@ app.post("/upload", upload, async (req, res) => {
     }
 
     const filePath = path.join(__dirname, "uploads", req.file.filename);
+    
+    // Read the file buffer
+    const dataBuffer = fs.readFileSync(filePath);
+    
+    // Parse the PDF using pdf-parse
+    const pdfData = await pdfParse(dataBuffer);
+    const textContent = pdfData.text;
+    
+    const contactInfo = extractContactInfo(textContent);
 
-    const pdfParser = new PDFParser(this, 1);
-
-    pdfParser.on("pdfParser_dataError", (errData) =>
-      console.error("Error parsing PDF:", errData.parserError)
-    );
-
-    // Parse the PDF and handle the data ready event
-    pdfParser.on("pdfParser_dataReady", (pdfData) => {
-      const textContent = pdfParser.getRawTextContent();
-      const contactInfo = extractContactInfo(textContent);
-
-      res.status(200).send({
-        message: "File uploaded and parsed successfully",
-        contactInfo: contactInfo,
-      });
+    res.status(200).send({
+      message: "File uploaded and parsed successfully",
+      contactInfo: contactInfo,
     });
-
-    pdfParser.loadPDF(filePath);
+    
   } catch (error) {
     console.error("Error in file upload and parsing:", error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+import ErrorMiddleware from "./middleware/err.js";
+
+app.use(ErrorMiddleware);
 
 dbConnect();
 

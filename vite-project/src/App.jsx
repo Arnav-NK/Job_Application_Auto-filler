@@ -24,7 +24,7 @@ const App = () => {
       element: <DashBoard></DashBoard>,
     },
     {
-      path: "/sign",
+      path: "/signup",
       element: <SignUp />,
     },
     {

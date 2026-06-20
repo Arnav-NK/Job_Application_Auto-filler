@@ -16,6 +16,7 @@
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "firebase": "^12.15.0",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.473.0",
     "pdf-lib": "^1.17.1",
@@ -30,6 +31,7 @@
     "redux-toolkit": "^1.1.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "three": "^0.184.0",
     "toastify": "^2.0.1",
     "tooltip": "^1.6.1",
     "uvcanvas": "^0.2.2"
