@@ -26,6 +26,7 @@ app.use(
       "http://localhost:5173",
       process.env.PORTFOLIO_URL,
       process.env.DASHBOARD_URL,
+      "https://job-application-auto-filler.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
