@@ -29,7 +29,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3004/api/v1/user/signup", {
+      const response = await fetch("https://job-application-auto-filler.onrender.com/api/v1/user/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

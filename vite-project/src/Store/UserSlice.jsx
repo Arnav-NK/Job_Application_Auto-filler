@@ -97,7 +97,7 @@ export const login = (email, password) => async (dispatch) => {
   dispatch(loginRequested());
   try {
     const { data } = await axios.post(
-      "http://localhost:3004/api/v1/user/login",
+      "https://job-application-auto-filler.onrender.com/api/v1/user/login",
       { email, password },
       {
         withCredentials: true,
@@ -117,7 +117,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:3004/api/v1/user/logout",
+      "https://job-application-auto-filler.onrender.com/api/v1/user/logout",
       {},
       {
         withCredentials: true,
@@ -136,7 +136,7 @@ export const updatePassword =
     dispatch(updatePasswordRequest());
     try {
       const { data } = await axios.put(
-        "http://localhost:3004/api/v1/user/update/password",
+        "https://job-application-auto-filler.onrender.com/api/v1/user/update/password",
         { currentpassword, newpassword, confirmationpassword },
         {
           withCredentials: true,

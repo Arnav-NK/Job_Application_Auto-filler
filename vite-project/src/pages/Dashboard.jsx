@@ -24,7 +24,7 @@ const Dashboard = () => {
     data.append("user_file", file);
 
     try {
-      const response = await axios.post("http://localhost:3004/upload", data, {
+      const response = await axios.post("https://job-application-auto-filler.onrender.com/upload", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

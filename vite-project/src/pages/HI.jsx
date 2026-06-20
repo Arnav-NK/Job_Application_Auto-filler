@@ -60,7 +60,7 @@ const HI = ({ autofillData }) => {
     console.log("Submitting Data:", person); 
 
     try {
-      const response = await fetch("http://localhost:3004/api/v1/register", {
+      const response = await fetch("https://job-application-auto-filler.onrender.com/api/v1/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
