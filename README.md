@@ -1,134 +1,336 @@
-# Job_Application_Auto-filler 🚀
+# 🚀 Installation & Setup Guide
 
-**Job_Application_Auto-filler** is a Chrome extension designed to make job hunting easier. Simply upload your resume in PDF format, and this tool will automatically scan your data and autofill job applications on popular portals. You can also manually edit the fields before submitting.
+## 1️⃣ Clone the Repository
 
- 📽️ Demo Video
-
-🎬 [Click to watch the demo](https://streamable.com/tom58r)
-
-## 🛠 Features
-
-- 🧠 **Auto-parsing**: Extracts your Name, Email, Phone, GitHub, LinkedIn, Domain, and Skills from your uploaded resume PDF.
-- ⚙️ **Manual edit support**: Update any field before submitting.
-- 🌐 **Cross-platform compatibility**: Works on all major job search websites.
-- 🔒 **Local processing**: No data is sent to any server unless explicitly saved by the user.
-
----
-
-## 🚀 How to Install
-
-1. **Clone or Download** this repo.
-
-2. (Optional) If there is a build setup (like Vite/Webpack), run:
-
-   ```bash
-   npm install
-   ```
-
-3. Go to **Google Chrome** and open:
-
-   ```
-   chrome://extensions/
-   ```
-
-4. Enable **Developer Mode**.
-
-5. Click **"Load Unpacked"** and select the folder that contains `manifest.json`.
-
-6. You should see the extension icon in the toolbar — you're ready to use it!
-
----
-
-## 🧪 Demo
-
-> Watch how it works in real-time:
-
-🎬 [Click to view demo](./Screen Recording 2025-04-11 211929.mp4)
-
----
-
-## 🧾 Tech Stack
-
-- 🧩 JavaScript, React (Frontend)
-- 🧠 Node.js, Express, pdf-parse (Backend Resume Parser)
-- 🔐 JWT for secure auth
-- ☁️ MongoDB for optional user data storage
-
----
-
-## 📁 Directory Structure
-
+```bash
+git clone <your-repository-url>
+cd Job_Application_Auto-filler
 ```
-job-autofiller/
-├── backend/
-│   ├── server.js
-│   └── parse-resume.js
-├── frontend/
-│   └── popup.html
-│   └── content.js
+
+---
+
+## 2️⃣ Backend Setup
+
+Navigate to the backend folder:
+
+```bash
+cd backend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+### Create Backend `.env`
+
+Inside the `backend` folder create a file named:
+
+```bash
+.env
+```
+
+The structure should look like:
+
+```text
+backend/
+├── server.js
+├── package.json
+├── .env
+```
+
+Add the following variables:
+
+```env
+PORT=3004
+
+MONGO_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret_key
+```
+
+Example:
+
+```env
+PORT=3004
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/jobautofiller
+JWT_SECRET=mysecretkey123
+```
+
+Save the file.
+
+Start the backend server:
+
+```bash
+node server.js
+```
+
+You should see:
+
+```bash
+Server running on port 3004
+```
+
+---
+
+## 3️⃣ Frontend Setup
+
+Open a new terminal and move to the frontend folder:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+### Create Frontend `.env`
+
+Inside the frontend folder create:
+
+```bash
+.env
+```
+
+Folder structure:
+
+```text
+frontend/
+├── src/
 ├── public/
-│   └── assets/
-├── manifest.json
-├── README.md
-└── .env
+├── .env
+├── package.json
+```
+
+Add:
+
+```env
+VITE_API_URL=http://localhost:3004
+```
+
+For production deployment:
+
+```env
+VITE_API_URL=https://your-backend-url.onrender.com
+```
+
+Start the frontend:
+
+```bash
+npm run dev
 ```
 
 ---
 
-## ▶️ How to Run the Backend
+## 4️⃣ Deploy Frontend to Vercel
 
-1. Navigate to the backend directory:
+Push your code to GitHub.
 
-   ```bash
-   cd backend
-   ```
+Go to:
 
-2. Install dependencies:
+https://vercel.com
 
-   ```bash
-   npm install
-   ```
+1. Login with GitHub.
+2. Click **Add New Project**.
+3. Import your repository.
+4. Select the frontend folder as the root directory.
+5. Add environment variable:
 
-3. Create a `.env` file with:
+```env
+VITE_API_URL=https://your-backend-url.onrender.com
+```
 
-   ```env
-   PORT=3004
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_secret_key
-   ```
+6. Click **Deploy**.
 
-4. Start the server:
+After deployment you'll get a URL like:
 
-   ```bash
-   node server.js
-   ```
+```text
+https://job-autofiller.vercel.app
+```
 
----
-
-## 🚀 How to Use the Extension
-
-1. Start the backend using `node server.js`.
-
-2. Go to the extension popup.
-
-3. Login or Sign up.
-
-4. Upload your resume in PDF format.
-
-5. Edit details if needed and click **Submit** to save your profile.
-
-6. Open any job application website.
-
-7. Click the extension icon and hit **"Auto Fill"** — your details will be filled automatically in matching fields.
+Copy this URL.
 
 ---
 
-## 🤝 Contributing
+## 5️⃣ Update Extension Home Page Link
 
-Pull requests are welcome! For major changes, please open an issue first.
+Open:
+
+```text
+public/home.html
+```
+
+Find:
+
+```html
+<a href="http://localhost:5173">Open Dashboard</a>
+```
+
+Replace it with your Vercel URL:
+
+```html
+<a href="https://job-autofiller.vercel.app">
+    Open Dashboard
+</a>
+```
+
+Save the file.
+
+If the URL is stored inside JavaScript, update it there as well:
+
+```javascript
+window.open(
+  "https://job-autofiller.vercel.app",
+  "_blank"
+);
+```
 
 ---
 
-## 📜 License
+## 6️⃣ Build the Extension
 
-[MIT](LICENSE)
+If using Vite:
+
+```bash
+npm run build
+```
+
+This will create a folder similar to:
+
+```text
+dist/
+```
+
+---
+
+## 7️⃣ Load the Extension in Chrome
+
+Open Chrome and visit:
+
+```text
+chrome://extensions/
+```
+
+Enable:
+
+```text
+Developer Mode
+```
+
+Click:
+
+```text
+Load Unpacked
+```
+
+Select the extension folder containing:
+
+```text
+manifest.json
+```
+
+Example:
+
+```text
+Job_Application_Auto-filler/
+├── manifest.json
+├── background.js
+├── content.js
+├── popup.html
+├── popup.js
+```
+
+or
+
+```text
+dist/
+├── manifest.json
+```
+
+After loading successfully, the extension icon will appear in the Chrome toolbar.
+
+---
+
+## 8️⃣ Using the Extension
+
+1. Start the backend server.
+2. Open the extension popup.
+3. Sign Up or Login.
+4. Upload your Resume PDF.
+5. Review and edit extracted details.
+6. Save your profile.
+7. Open any supported job application website.
+8. Click **Auto Fill**.
+9. The extension will automatically populate matching fields.
+
+---
+
+## 🔧 Troubleshooting
+
+### Backend Not Connecting
+
+Verify:
+
+```env
+VITE_API_URL=http://localhost:3004
+```
+
+or
+
+```env
+VITE_API_URL=https://your-backend-url.onrender.com
+```
+
+---
+
+### Extension Not Loading
+
+Ensure:
+
+```text
+manifest.json
+```
+
+exists in the selected folder.
+
+---
+
+### Changes Not Reflecting
+
+After modifying files:
+
+```bash
+npm run build
+```
+
+Then go to:
+
+```text
+chrome://extensions/
+```
+
+and click:
+
+```text
+Reload
+```
+
+for the extension.
+
+---
+
+## 🌐 Deployment Flow
+
+```text
+Frontend (Vercel)
+       │
+       ▼
+Backend (Render)
+       │
+       ▼
+MongoDB Atlas
+```
