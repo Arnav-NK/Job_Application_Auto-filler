@@ -1,9 +1,67 @@
 # 🚀 Installation & Setup Guide
 
+# ⚡ Quick Start
+
+No backend setup, environment variables, or coding knowledge required.
+
+### 1. Download the Extension
+
+Download the extension source code (ZIP) and extract it on your computer.
+
+### 2. Open Chrome Extensions
+
+Open Google Chrome and visit:
+
+```text
+chrome://extensions/
+```
+
+Enable **Developer Mode** using the toggle in the top-right corner.
+
+### 3. Load the Extension
+
+Click **Load Unpacked** and select the extracted extension folder containing:
+
+```text
+manifest.json
+```
+
+Example:
+
+```text
+Job_Application_Auto-filler/
+├── manifest.json
+├── popup.html
+├── popup.js
+├── content.js
+├── background.js
+```
+
+### 4. Launch the Extension
+
+After loading successfully, the extension icon will appear in the Chrome toolbar.
+
+### 5. Create an Account / Login
+
+Open the extension popup and sign up or log in to your account.
+
+### 6. Upload Your Resume
+
+Upload your resume PDF and save your profile information.
+
+### 7. Start Autofilling
+
+Open any supported job application page and click **Auto Fill** from the extension.
+
+The extension will automatically detect and fill matching form fields using your saved resume data.
+
+### 🎉 You're Ready to Go!
+
+
 ## 1️⃣ Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone [<your-repository-url>](https://github.com/Arnav-NK/Job_Application_Auto-filler.git)
 cd Job_Application_Auto-filler
 ```
 
