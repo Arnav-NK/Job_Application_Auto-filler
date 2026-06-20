@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { login, clearAllUserError } from "@/Store/UserSlice";
 import { toast } from "react-toastify";
 
@@ -135,9 +135,9 @@ const Login = () => {
 
           <p className="mt-4 text-center text-sm text-gray-400">
             Don't have an account?{" "}
-            <a href="/signup" className="text-blue-400 hover:text-blue-300">
+            <Link to="/signup" className="text-blue-400 hover:text-blue-300">
               Sign up
-            </a>
+            </Link>
           </p>
         </CardContent>
       </Card>
